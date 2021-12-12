@@ -7,8 +7,11 @@ namespace Trimbitas_Andreea_Lavinia_Lab8.Models
 {
     public class Category
     {
-        public int ID { get; set; }
-        public string CategoryName { get; set; }
-        public ICollection<BookCategory> BookCategories { get; set; }
+        public class Category
+        {
+            public int ID { get; set; }
+            public string CategoryName { get; set; }
+            public ICollection<BookCategory> BookCategories { get; set; }
+        }
     }
 }

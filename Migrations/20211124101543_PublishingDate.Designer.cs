@@ -10,7 +10,7 @@ using Trimbitas_Andreea_Lavinia_Lab8.Data;
 namespace Trimbitas_Andreea_Lavinia_Lab8.Migrations
 {
     [DbContext(typeof(Trimbitas_Andreea_Lavinia_Lab8Context))]
-    [Migration("20211124101543_PublishingDate")]
+    [Migration("20211124173952_PublishingDate")]
     partial class PublishingDate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,29 +21,29 @@ namespace Trimbitas_Andreea_Lavinia_Lab8.Migrations
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Trimbitas_Andreea_Lavinia_Lab8.Models.Book", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            modelBuilder.Entity("Ionita_Andreea_Lab8.Models.Book", b =>
+            {
+                b.Property<int>("ID")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Author")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Author")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(6,2)");
+                b.Property<decimal>("Price")
+                    .HasColumnType("decimal(6,2)");
 
-                    b.Property<DateTime>("PublishingDate")
-                        .HasColumnType("datetime2");
+                b.Property<DateTime>("PublishingDate")
+                    .HasColumnType("datetime2");
 
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Title")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                b.HasKey("ID");
 
-                    b.ToTable("Book");
-                });
+                b.ToTable("Book");
+            });
 #pragma warning restore 612, 618
         }
     }

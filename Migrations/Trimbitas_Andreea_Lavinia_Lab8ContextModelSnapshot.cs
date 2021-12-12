@@ -19,29 +19,131 @@ namespace Trimbitas_Andreea_Lavinia_Lab8.Migrations
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Trimbitas_Andreea_Lavinia_Lab8.Models.Book", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            modelBuilder.Entity("Ionita_Andreea_Lab8.Models.Book", b =>
+            {
+                b.Property<int>("ID")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Author")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Author")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(6,2)");
+                b.Property<decimal>("Price")
+                    .HasColumnType("decimal(6,2)");
 
-                    b.Property<DateTime>("PublishingDate")
-                        .HasColumnType("datetime2");
+                b.Property<int>("PublisherID")
+                    .HasColumnType("int");
 
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<DateTime>("PublishingDate")
+                    .HasColumnType("datetime2");
 
-                    b.HasKey("ID");
+                b.Property<string>("Title")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Book");
-                });
+                b.HasKey("ID");
+
+                b.HasIndex("PublisherID");
+
+                b.ToTable("Book");
+            });
+
+            modelBuilder.Entity("Ionita_Andreea_Lab8.Models.BookCategory", b =>
+            {
+                b.Property<int>("ID")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                b.Property<int>("BookID")
+                    .HasColumnType("int");
+
+                b.Property<int>("CategoryID")
+                    .HasColumnType("int");
+
+                b.HasKey("ID");
+
+                b.HasIndex("BookID");
+
+                b.HasIndex("CategoryID");
+
+                b.ToTable("BookCategory");
+            });
+
+            modelBuilder.Entity("Ionita_Andreea_Lab8.Models.Category", b =>
+            {
+                b.Property<int>("ID")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                b.Property<string>("CategoryName")
+                    .HasColumnType("nvarchar(max)");
+
+                b.HasKey("ID");
+
+                b.ToTable("Category");
+            });
+
+            modelBuilder.Entity("Ionita_Andreea_Lab8.Models.Publisher", b =>
+            {
+                b.Property<int>("ID")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                b.Property<string>("PublisherName")
+                    .HasColumnType("nvarchar(max)");
+
+                b.HasKey("ID");
+
+                b.ToTable("Publisher");
+            });
+
+            modelBuilder.Entity("Ionita_Andreea_Lab8.Models.Book", b =>
+            {
+                b.HasOne("Ionita_Andreea_Lab8.Models.Publisher", "Publisher")
+                    .WithMany("Books")
+                    .HasForeignKey("PublisherID")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+
+                b.Navigation("Publisher");
+            });
+
+            modelBuilder.Entity("Ionita_Andreea_Lab8.Models.BookCategory", b =>
+            {
+                b.HasOne("Ionita_Andreea_Lab8.Models.Book", "Book")
+                    .WithMany("BookCategories")
+                    .HasForeignKey("BookID")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+
+                b.HasOne("Ionita_Andreea_Lab8.Models.Category", "Category")
+                    .WithMany("BookCategories")
+                    .HasForeignKey("CategoryID")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+
+                b.Navigation("Book");
+
+                b.Navigation("Category");
+            });
+
+            modelBuilder.Entity("Ionita_Andreea_Lab8.Models.Book", b =>
+            {
+                b.Navigation("BookCategories");
+            });
+
+            modelBuilder.Entity("Ionita_Andreea_Lab8.Models.Category", b =>
+            {
+                b.Navigation("BookCategories");
+            });
+
+            modelBuilder.Entity("Ionita_Andreea_Lab8.Models.Publisher", b =>
+            {
+                b.Navigation("Books");
+            });
 #pragma warning restore 612, 618
         }
     }

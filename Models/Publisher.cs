@@ -9,6 +9,6 @@ namespace Trimbitas_Andreea_Lavinia_Lab8.Models
     {
         public int ID { get; set; }
         public string PublisherName { get; set; }
-        public ICollection<Book> Books { get; set; }
+        public ICollection<Book> Books { get; set; } //navigation property
     }
 }
